@@ -11,7 +11,7 @@ STATICFILES_DIRS = (
 SECRET_KEY = 'CanIHazS3cret?Meis1337'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -24,6 +24,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'set_feedback',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,10 +62,20 @@ WSGI_APPLICATION = 'feedbackapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-import dj_database_url
+
 DATABASES = {
-    'default': dj_database_url.config()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'degc9ma311g7rq',                      
+        'USER': 'ysvdttxtarfppr',
+        'PASSWORD': 's0_qJ3zxyj1LIv67y50cDP8GIG',
+        'HOST': 'ec2-107-22-248-209.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
 }
+
+
+
 
 
 # Internationalization
@@ -78,3 +90,34 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_URL = '/static/'
+
+# Parse database configuration from $DATABASE_URL
+if os.environ.get('DATABASE_URL', None):
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
