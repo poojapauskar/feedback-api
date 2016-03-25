@@ -33,14 +33,34 @@ def JSONResponse(data = None, status = StatusCode.OK):
 
 def get_queryset(request):
 
-  good=len(Set_feedback.objects.filter(value=1))
-  bad=len(Set_feedback.objects.filter(value=0))
+  value1=len(Set_feedback.objects.filter(value=1))
+  value2=len(Set_feedback.objects.filter(value=2))
+  value3=len(Set_feedback.objects.filter(value=3))
+  value4=len(Set_feedback.objects.filter(value=4))
+  value5=len(Set_feedback.objects.filter(value=5))
+  value6=len(Set_feedback.objects.filter(value=6))
+  value7=len(Set_feedback.objects.filter(value=7))
+  value8=len(Set_feedback.objects.filter(value=8))
+  value9=len(Set_feedback.objects.filter(value=9))
+  value10=len(Set_feedback.objects.filter(value=10))
+  value11=len(Set_feedback.objects.filter(value=11))
+  value12=len(Set_feedback.objects.filter(value=12))
 
   
   results=[]
   results.append({
-  		'good':good,
-  		'bad':bad,
+  		'this is boring':value1,
+  		'need to know more...':value2,
+      'i feel sleepy':value3,
+      'please slow down':value4,
+      'this is interesting':value5,
+      'im saturated':value6,
+      'im lovin it':value7,
+      'i need a chai break':value8,
+      'lost the track':value9,
+      'this is informative':value10,
+      'best thing in the world':value11,
+      'why am i here???':value12,
   	})
   
   return JsonResponse((list(results)),safe=False)
